@@ -4,13 +4,6 @@ require 'selenium/rake/tasks'
 require 'parallel'
 require 'yaml'
 
-
-# Edit the browser yaml file to specify which os/browsers you want to use
-# You can use multiple files and specify which to use at runtime
-# browser_file = ENV['BROWSERS'] || "browsers_full.yml"
-
-# @browsers = YAML.load_file(browser_file)[:browsers]
-
 namespace :selenium do
   Cucumber::Rake::Task.new(:local_selenium) do |t|
           t.profile = "selenium"
