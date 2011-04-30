@@ -1,1 +1,2 @@
 selenium: --format html --out reports/local --format pretty -r features/support -r features/support/env.rb  -r features/step_definitions features
+sauce: --format html --out reports/sauce --format pretty -r features/support_sauce -r features/support -r features/support/env.rb  -r features/step_definitions features
