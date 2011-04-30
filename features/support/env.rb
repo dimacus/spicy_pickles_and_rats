@@ -5,14 +5,17 @@ require 'capybara/cucumber'
 require 'capybara/spec/test_app'
 
 Capybara.current_driver = :selenium
+Capybara.server_port = 9887
 
 if ENV['SAUCE']
   require 'sauce'
   require 'sauce/capybara'
-
+  
+  Capybara.current_driver = :sauce
+  
   ENV['SAUCE_USERNAME'] = "username"
   ENV['SAUCE_API_KEY'] = "your-api-key-goes-here"
-
+  
   Sauce.config do |c|
     c.username = ENV['SAUCE_USERNAME']
     c.access_key = ENV['SAUCE_API_KEY']    
@@ -30,21 +33,16 @@ if ENV['SAUCE']
                                      :domain => ENV['SAUCE_CAPYBARA_DOMAIN'],
                                      :quiet => true)
   @sauce_tunnel.wait_until_ready
-  puts "[Connected to Sauce OnDemand...]"
+  puts "[Connected!]"
   
   at_exit do
     @sauce_tunnel.disconnect
   end
 
-  Before('@javascript') do
-    Capybara.current_driver = :sauce
-  end
-  
-  Before do |scenario|
-    
+  Before do |scenario|    
     ENV['SAUCE_CAPYBARA_NEW_SESSION'] = "true"
     ENV['SAUCE_CAPYBARA_JOB_NAME'] = scenario.name
-    
+
   end
   
 end
