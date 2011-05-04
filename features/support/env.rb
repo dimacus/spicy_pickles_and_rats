@@ -5,7 +5,6 @@ require 'capybara/cucumber'
 require 'capybara/spec/test_app'
 
 Capybara.current_driver = :selenium
-Capybara.server_port = 9887
 
 if ENV['SAUCE']
   require 'sauce'
