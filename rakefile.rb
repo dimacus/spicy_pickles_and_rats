@@ -25,36 +25,3 @@ namespace :selenium do
     Rake::Task[:selenium_in_cloud].invoke
   end
 end
-
-
-# desc "Run all features against all browsers in parallel"
-# task :cucumber_sauce do
-#   year, month, day = Date.today.strftime("%Y,%m,%d").split(",")
-#   dir = "reports/#{year}/#{month}"
-#   FileUtils::mkdir_p(dir)
-#   
-#   Parallel.map(@browsers, :in_threads => @browsers.size) do |browser|
-#     begin
-#       puts "Running with: #{browser.inspect}"
-#       ENV['SELENIUM_BROWSER_OS'] = browser[:os]
-#       ENV['SELENIUM_BROWSER_NAME'] = browser[:name]
-#       ENV['SELENIUM_BROWSER_VERSION'] = browser[:version]
-#       ENV['SELENIUM_REPORT_FILENAME'] = "#{dir}/#{year}-#{month}-#{day}-#{browser[:os]}_#{browser[:name]}_#{browser[:version]}.html".gsub(/\s/, "_").gsub("..", ".")
-#       
-#       year, month, day = Date.today.strftime("%Y,%m,%d").split(",")
-#       dir = "reports/#{year}/#{month}"
-#       
-#       Rake::Task[ :run_browser_tests ].execute({ :browser_name => browser[:name],
-#                                                  :browser_version => browser[:version],
-#                                                  :browser_od => browser[:os] })
-#     rescue RuntimeError
-#       puts "Error while running task"
-#     end
-#   end
-# end
-# 
-# Cucumber::Rake::Task.new(:'run_browser_tests') do |t|
-#   t.cucumber_opts = "--format pretty --format html features"
-# end
-# 
-# task :default => [:cucumber_sauce]
