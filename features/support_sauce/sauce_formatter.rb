@@ -3,20 +3,7 @@ require 'cucumber/formatter/console'
 module Cucumber
   module Formatter
     module Console
-  
-      def format_step(keyword, step_match, status, source_indent)
-        comment = if source_indent
-          c = (' # ' + step_match.file_colon_line + " -- OS:#{ENV['SELENIUM_BROWSER_OS']} Browser: #{ENV['SELENIUM_BROWSER_NAME']} Version: #{ENV['SELENIUM_BROWSER_VERSION']} Browser Session ID: #{ENV['BROWSER_SESSION_ID']}").indent(source_indent)
-          format_string(c, :comment)
-        else
-          ''
-        end
-
-        format = format_for(status, :param)
-        line = keyword + " " + step_match.format_args(format) + comment
-        format_string(line, status)
-      end
-      
+        
       def print_exception(e, status, indent)
         
         if ENV['SAUCE_USERNAME']
